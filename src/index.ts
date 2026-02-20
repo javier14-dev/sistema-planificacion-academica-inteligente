@@ -1,4 +1,4 @@
-import { Usuario } from "./models/Usuario";
+import { Usuario } from "./domain/Usuario";
 
 const usuario1 = new Usuario("1", "Javier", "jcondorich@unjbg.edu.pe");
 
