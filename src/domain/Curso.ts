@@ -1,23 +1,47 @@
+import { Docente } from "./Docente";
+import { Aula } from "./Aula";
+import { Horario } from "./Horario";
+
 export class Curso {
-    private id: string;
-    private nombre: string;
-    private descripcion: string;
+    constructor(
+        private codigo: string,
+        private nombre: string,
+        private creditos: number,
+        private docente: Docente,
+        private aula: Aula,
+        private horario: Horario
+    ) {}
 
-    constructor(id: string, nombre: string, descripcion: string) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-    }
-
-    public getId(): string {
-        return this.id;
+    public getCodigo(): string {
+        return this.codigo;
     }
 
     public getNombre(): string {
         return this.nombre;
     }
 
-    public getDescripcion(): string {
-        return this.descripcion;
+    public getCreditos(): number {
+        return this.creditos;
+    }
+
+    public getDocente(): Docente {
+        return this.docente;
+    }
+
+    public getAula(): Aula {
+        return this.aula;
+    }
+
+    public getHorario(): Horario {
+        return this.horario;
+    }
+
+    public toString(): string {
+        return `
+Curso: ${this.nombre}
+Docente: ${this.docente.getNombre()}
+Aula: ${this.aula.getCodigo()}
+Horario: ${this.horario.toString()}
+        `;
     }
 }
