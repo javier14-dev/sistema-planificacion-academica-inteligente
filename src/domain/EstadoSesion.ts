@@ -1,0 +1,5 @@
+export enum EstadoSesion {
+  PENDIENTE = "PENDIENTE",
+  COMPLETADA = "COMPLETADA",
+  CANCELADA = "CANCELADA"
+}
