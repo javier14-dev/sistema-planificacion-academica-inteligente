@@ -1,43 +1,48 @@
+import { Unidad } from "./Unidad";
+import { Evaluacion } from "./Evaluacion";
+
 export class Curso {
-    constructor(
-        private codigo: string,
-        private nombre: string,
-        private creditos: number,
-        private docente: Docente,
-        private aula: Aula,
-        private horario: Horario
-    ) {}
+  private unidades: Unidad[] = [];
+  private evaluaciones: Evaluacion[] = [];
 
-    public getCodigo(): string {
-        return this.codigo;
+  constructor(
+    private id: number,
+    private nombre: string
+  ) {}
+
+  public agregarUnidad(unidad: Unidad): void {
+    this.unidades.push(unidad);
+  }
+
+  public agregarEvaluacion(evaluacion: Evaluacion): void {
+    this.evaluaciones.push(evaluacion);
+  }
+
+  public calcularProgreso(): number {
+    if (this.unidades.length === 0) {
+      return 0;
     }
 
-    public getNombre(): string {
-        return this.nombre;
+    let suma = 0;
+
+    for (const unidad of this.unidades) {
+      suma += unidad.calcularProgreso();
     }
 
-    public getCreditos(): number {
-        return this.creditos;
+    return suma / this.unidades.length;
+  }
+
+  public calcularNotaFinal(): number {
+    let suma = 0;
+
+    for (const evaluacion of this.evaluaciones) {
+      suma += evaluacion.calcularNotaFinal();
     }
 
-    public getDocente(): Docente {
-        return this.docente;
-    }
+    return suma;
+  }
 
-    public getAula(): Aula {
-        return this.aula;
-    }
-
-    public getHorario(): Horario {
-        return this.horario;
-    }
-
-    public toString(): string {
-        return `
-Curso: ${this.nombre}
-Docente: ${this.docente.getNombre()}
-Aula: ${this.aula.getCodigo()}
-Horario: ${this.horario.toString()}
-        `;
-    }
+  public getNombre(): string {
+    return this.nombre;
+  }
 }
