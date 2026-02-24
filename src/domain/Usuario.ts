@@ -1,38 +1,41 @@
 import { Curso } from "./Curso";
+import { SesionEstudio } from "./SesionEstudio";
+import { Recordatorio } from "./Recordatorio";
 
 export class Usuario {
-    private id: string;
-    private nombre: string;
-    private email: string;
-    private cursos: Curso[] = [];
+  private cursos: Curso[] = [];
+  private sesiones: SesionEstudio[] = [];
+  private recordatorios: Recordatorio[] = [];
 
-    constructor(id: string, nombre: string, email: string) {
-        this.id = id;
-        this.nombre = nombre;
-        this.email = email;
+  constructor(
+    private id: number,
+    private nombre: string,
+    private correo: string
+  ) {}
+
+  public agregarCurso(curso: Curso): void {
+    this.cursos.push(curso);
+  }
+
+  public agendarSesion(sesion: SesionEstudio): void {
+    this.sesiones.push(sesion);
+  }
+
+  public agregarRecordatorio(recordatorio: Recordatorio): void {
+    this.recordatorios.push(recordatorio);
+  }
+
+  public calcularProgresoGlobal(): number {
+    if (this.cursos.length === 0) {
+      return 0;
     }
 
-    getId(): string {
-        return this.id;
+    let suma = 0;
+
+    for (const curso of this.cursos) {
+      suma += curso.calcularProgreso();
     }
 
-    getNombre(): string {
-        return this.nombre;
-    }
-
-    getEmail(): string {
-        return this.email;
-    }
-
-    public agregarCurso(curso: Curso): void {
-        this.cursos.push(curso);
-    }
-
-    public obtenerCursos(): Curso[] {
-        return this.cursos;
-    }
-
-    buscarCursoPorNombre(nombre: string): Curso | undefined {
-        return this.cursos.find(curso => curso.getNombre() === nombre);
-    }
+    return suma / this.cursos.length;
+  }
 }
