@@ -1,1 +1,1 @@
-
+import "./interface/cli/main";
