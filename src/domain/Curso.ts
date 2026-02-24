@@ -1,7 +1,3 @@
-import { Docente } from "./Docente";
-import { Aula } from "./Aula";
-import { Horario } from "./Horario";
-
 export class Curso {
     constructor(
         private codigo: string,
